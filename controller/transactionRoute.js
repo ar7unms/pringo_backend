@@ -67,6 +67,39 @@ router.post('/search', (req, res) => {
         }
     });
 });
+router.post('/todayscollection', (req, res) => {
+    let tot = 0; // Initialize tot to 0
+    tran.getcollection((error, result) => {
+        if (error) {
+            res.status(500).send("Error retrieving collection");
+        } else {
+            if (result.length > 0) {
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].amount);
+                    tot += result[i].amount;
+                }
+                res.json({ status: "success", total: tot });
+            } else {
+                res.json({ status: "success", total: 0 });
+            }
+        }
+    });
+});
+
+router.post('/todayscollections', (req, res) => {
+    tran.getcollections((error, result) => {
+        if (error) {
+            res.status(500).send("Error retrieving collection");
+        } else {
+            if (result.length > 0) {
+                
+                res.status(200).json(result);
+            } else {
+                res.json({ status: "failed", total: 0 });
+            }
+        }
+    });
+});
 
 
 

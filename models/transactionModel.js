@@ -55,7 +55,15 @@ const transcationModel={
     //     pool.query(query, [token, emailid], callback);
     // }
     
-
+    getcollection:(callback)=>{
+        const query='SELECT amount FROM transaction WHERE DATE(datetime)=CURRENT_DATE';
+        pool.query(query,callback);
+        
+    },
+    getcollections:(callback)=>{
+        const query='SELECT * FROM transaction WHERE DATE(datetime)=CURRENT_DATE';
+        pool.query(query,callback);
+    }    
 };
 
 module.exports=transcationModel
