@@ -60,8 +60,18 @@ const transcationModel={
         pool.query(query,callback);
         
     },
+    getprintcollection:(callback)=>{
+        const query='SELECT amount FROM transaction WHERE DATE(datetime)=CURRENT_DATE AND type="print"';
+        pool.query(query,callback);
+        
+    },
+    getbindcollection:(callback)=>{
+        const query='SELECT amount FROM transaction WHERE DATE(datetime)=CURRENT_DATE AND type="bind"';
+        pool.query(query,callback);
+        
+    },
     getcollections:(callback)=>{
-        const query='SELECT * FROM transaction WHERE DATE(datetime)=CURRENT_DATE';
+        const query='SELECT transaction.*,member.name FROM transaction INNER JOIN member ON transaction.userid = member.id WHERE DATE(transaction.datetime)=CURRENT_DATE';
         pool.query(query,callback);
     }    
 };

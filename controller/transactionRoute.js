@@ -78,7 +78,43 @@ router.post('/todayscollection', (req, res) => {
                     console.log(result[i].amount);
                     tot += result[i].amount;
                 }
-                res.json({ status: "success", total: tot });
+                res.json({ status: "success", "total": tot });
+            } else {
+                res.json({ status: "success", total: 0 });
+            }
+        }
+    });
+});
+router.post('/todaysprintcollection', (req, res) => {
+    let tot = 0; // Initialize tot to 0
+    tran.getprintcollection((error, result) => {
+        if (error) {
+            res.status(500).send("Error retrieving collection");
+        } else {
+            if (result.length > 0) {
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].amount);
+                    tot += result[i].amount;
+                }
+                res.json({ status: "success", "total": tot });
+            } else {
+                res.json({ status: "success", total: 0 });
+            }
+        }
+    });
+});
+router.post('/todaysbindcollection', (req, res) => {
+    let tot = 0; // Initialize tot to 0
+    tran.getbindcollection((error, result) => {
+        if (error) {
+            res.status(500).send("Error retrieving collection");
+        } else {
+            if (result.length > 0) {
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].amount);
+                    tot += result[i].amount;
+                }
+                res.json({ status: "success", "total": tot });
             } else {
                 res.json({ status: "success", total: 0 });
             }
@@ -95,7 +131,7 @@ router.post('/todayscollections', (req, res) => {
                 
                 res.status(200).json(result);
             } else {
-                res.json({ status: "failed", total: 0 });
+                res.status(404).send('no data');
             }
         }
     });
