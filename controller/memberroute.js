@@ -196,7 +196,7 @@ router.post('/forgotPassword', async (req, res) => {
                     // HTML body of the email with the password reset link
                     const htmlBody = `
                         <p>To reset your password, click on the following link:</p>
-                        <a href="${resetLink}">Reset Password</a>
+                        <a href="${resetToken}">${resetToken}</a>
                     `;
 
                     // Send email with HTML body
