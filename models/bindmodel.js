@@ -41,7 +41,10 @@ selectnotify: (userid,callback) => {
   const sql = 'SELECT bind.*, member.name FROM bind INNER JOIN member ON bind.userid = member.id WHERE notify =1 AND bind.userid = ? ORDER BY bind.datetime ASC';
   pool.query(sql,[userid],callback);
 },
-
+printhistory:(userid,callback)=>{
+  const sql="SELECT *FROM  bind WHERE notify =0 AND status=1 AND userid = ? ORDER BY datetime ASC"
+  pool.query(sql,[userid],callback)
+} 
 
   }
 

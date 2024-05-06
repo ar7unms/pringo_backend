@@ -146,4 +146,21 @@ router.post('/viewnotupdated', (req, res) => {
     });
 });
 
+router.post('/printhistor', (req, res) => {
+    bind.printhistory(req.body.userid,(error,results)=>{
+        if(error){
+            res.status(500).send('Error retrieving print data');
+            console.log("//////////////////error1")
+        }
+        if(results.length > 0){
+            console.log("//////////////////noerror")
+            res.status(200).json(results);
+        }
+        else{
+            console.log("//////////////////error2")
+            res.status(404).send('no data');
+        }
+    });
+});
+
 module.exports = router;

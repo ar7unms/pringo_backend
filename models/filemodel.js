@@ -49,7 +49,11 @@ const User = {
     selectnotify: (userid,callback) => {
         const sql = 'SELECT print.*, member.name FROM print INNER JOIN member ON print.userid = member.id WHERE notify =1 AND print.userid = ? ORDER BY print.datetime ASC';
         pool.query(sql,[userid],callback);
-    }    
+    },   
+    printhistory:(userid,callback)=>{
+        const sql="SELECT *FROM  print WHERE notify =0 AND status=1 AND userid = ? ORDER BY datetime ASC"
+        pool.query(sql,[userid],callback)
+    } 
 };
 
 module.exports = User;
